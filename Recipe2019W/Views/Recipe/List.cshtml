@@ -2,29 +2,7 @@
 
 @foreach (var r in Model.Recipes)
 {
-    <div class="card card-outline-primary m-1 p-1">
-        <div class="card-body">
-            <div class="bg-faded p-1" style="background-color:orangered;">
-                <h3>
-                    <span class="font-weight-bold text-uppercase">@r.Name</span>
-                    <h6>
-                        <span class="d-inline-flex text-left p-1 m-2" style="color: white;">CREATED BY: @r.Creator</span>
-                        <span class="d-inline-flex text-left p-1 m-2" style="color: white;">CREATED ON: @r.DateCreated.ToLongDateString().ToUpper()</span>
-                    </h6>
-                </h3>
-            </div>
-            <div>
-                <span class="badge badge-pill badge-primary" style="background-color: rosybrown; display: inline-block;">
-                    Prep Time: @r.PrepTime MIN
-                </span>
-                <span class="badge badge-pill badge-primary" style="background-color: saddlebrown; display: inline-block;">
-                    Total Time: @r.TotalTimeS
-                </span>
-            </div>
-
-            <span class="card-text col p-1">@r.Description</span>
-        </div>
-    </div>
+    @Html.Partial("RecipeSummary",r)
 
 }
 <div class="float-right" 
