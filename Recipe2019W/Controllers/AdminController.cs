@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Recipe2019W.Models;
 
 namespace Recipe2019W.Controllers
 {
-    public class AdminController:Controller
+    [Authorize]
+    public class AdminController : Controller
     {
         private IRecipeRepository repository;
 
@@ -20,7 +22,7 @@ namespace Recipe2019W.Controllers
 
         public ViewResult Edit(int recipeID) =>
             //Returns the first object in the collection that matches the query, if no match, null returned
-            View(repository.Recipes.FirstOrDefault(r => r.RecipeID == recipeID)); 
+            View(repository.Recipes.FirstOrDefault(r => r.RecipeID == recipeID));
 
         [HttpPost]
         public IActionResult Edit(Recipe recipe)

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +28,14 @@ namespace Recipe2019W
             // Setup the database connection
             services.AddDbContext<ApplicationDBContext>(options =>
                 options.UseSqlServer(Configuration["Data:Recipe2019W:ConnectionString"]));
+
+            // Setup Identity database connection
+            services.AddDbContext<AppIdentityDbContext>(options =>
+                options.UseSqlServer(Configuration["Data:Recipe2019WIdentity:ConnectionString"]));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<AppIdentityDbContext>()
+                .AddDefaultTokenProviders();
 
             //Everytime time IRecipeRepository is called, it will create the repository
             services.AddTransient<IRecipeRepository, EFRecipeRepository>();
@@ -55,6 +64,8 @@ namespace Recipe2019W
             app.UseStaticFiles();
             // Need to have a Session
             app.UseSession();
+            // Secuirity Implementation
+            app.UseAuthentication();
             // Initialize Routes
             app.UseMvc(routes =>
                 {
@@ -91,6 +102,8 @@ namespace Recipe2019W
             );
             // Send the database to the app
             SeedData.EnsurePopulated(app);
+
+            IdentitySeedData.EnsurePopulated(app);
         }
     }
 }
