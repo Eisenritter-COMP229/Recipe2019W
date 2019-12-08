@@ -1,0 +1,11 @@
+﻿@model Recipe
+
+<h2>@Model.Name</h2>
+<p>@Model.Description</p>
+
+    <a asp-action="Edit"
+       asp-controller="Admin"
+       asp-route-recipeID="@Model.RecipeID"
+       class="btn btn-sm btn-warning">
+        Update
+    </a>

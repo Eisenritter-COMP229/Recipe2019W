@@ -9,5 +9,7 @@ namespace Recipe2019W.Models
     public interface IRecipeRepository
     {
         IQueryable<Recipe> Recipes { get; }
+        void SaveRecipe(Recipe recipe);
+        Recipe DeleteRecipe(int recipeID);
     }
 }

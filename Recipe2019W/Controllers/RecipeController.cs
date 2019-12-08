@@ -37,10 +37,19 @@ namespace Recipe2019W.Controllers
                     {
                         CurrentPage = recipePage,
                         ItemsPerPage = PageSize,
-                        TotalItems = repository.Recipes.Count()
+                        TotalItems = repository.Recipes
+                            .Where(r => category == null || r.Type == category)
+                            .Count()
                     },
                     CurrentCategory = category
                 }
             );
+
+        [HttpPost]
+        public ActionResult Details(int recipeID)
+        {
+            Recipe recipe = repository.Recipes.FirstOrDefault(r => r.RecipeID == recipeID);
+            return View("Details", recipe);
+        }
     }
 }

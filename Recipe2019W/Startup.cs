@@ -30,8 +30,15 @@ namespace Recipe2019W
 
             //Everytime time IRecipeRepository is called, it will create the repository
             services.AddTransient<IRecipeRepository, EFRecipeRepository>();
+
+            services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+
             // Add MVC Service
             services.AddMvc();
+            // Allocate Memory to Server
+            services.AddMemoryCache();
+            // Add Service to Session
+            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -46,6 +53,8 @@ namespace Recipe2019W
             app.UseStatusCodePages();
             // To use bootstrap files
             app.UseStaticFiles();
+            // Need to have a Session
+            app.UseSession();
             // Initialize Routes
             app.UseMvc(routes =>
                 {
@@ -59,19 +68,19 @@ namespace Recipe2019W
                     routes.MapRoute(
                         name: null,
                         template: "Page{recipePage:int}",
-                        defaults: new { Controller = "Recipe", action = "List", productPage = 1 }
+                        defaults: new { Controller = "Recipe", action = "List", recipePage = 1 }
                     );
 
                     routes.MapRoute(
                         name: null,
                         template: "{category}",
-                        defaults: new { Controller = "Recipe", action = "List", productPage = 1 }
+                        defaults: new { Controller = "Recipe", action = "List", recipePage = 1 }
                     );
 
                     routes.MapRoute(
                         name: null,
                         template: "",
-                        defaults: new { Controller = "Recipe", action = "List", productPage = 1 }
+                        defaults: new { Controller = "Recipe", action = "List", recipePage = 1 }
                     );
 
                     routes.MapRoute(
