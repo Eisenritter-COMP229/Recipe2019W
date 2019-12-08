@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Heart Recipes</title>
+    <link rel="stylesheet"
+          asp-href-include="/lib/bootstrap/**/*.min.css"
+          asp-fallback-href-exclude="**/*-reboot,**/*-grid*" />
+    <link rel="stylesheet" asp-href-include="/lib/fontawesome/css/*.min.css" />
+</head>
+
+<body>
+<div class="navbar navbar-inverse bg-inverse" role="navigation">
+    <div class="row">
+        <a class="navbar-brand" href="#">HEART RECIPES</a>
+    </div>
+</div>
+<div>
+    @RenderBody()
+</div>
+</body>
+</html>
