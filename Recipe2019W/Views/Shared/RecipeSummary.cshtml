@@ -2,12 +2,16 @@
 
 <div class="card card-outline-primary m-1 p-1">
     <div class="card-body">
-        <div class="bg-faded p-1" style="background-color:orangered;">
+        <div class="bg-faded p-1" style="background-color:#ff8080;">
             <h3>
                 <span class="font-weight-bold text-uppercase">@Model.Name</span>
                 <h6>
-                    <span class="d-inline-flex text-left p-1 m-2" style="color: white;">CREATED BY: @Model.Creator</span>
-                    <span class="d-inline-flex text-left p-1 m-2" style="color: white;">CREATED ON: @Model.DateCreated.ToLongDateString().ToUpper()</span>
+                    <span class="d-inline-flex text-left p-1 m-2" style="color: white; background-color: rgba(255, 255, 255, 0.2)">
+                        CREATED BY: @Model.Creator
+                    </span>
+                    <span class="d-inline-flex text-left p-1 m-2" style="color: white;background-color: rgba(255, 255, 255, 0.2) " >
+                        CREATED ON: @Model.DateCreated.ToLongDateString().ToUpper()
+                    </span>
                 </h6>
             </h3>
         </div>

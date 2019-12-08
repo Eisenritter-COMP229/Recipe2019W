@@ -49,13 +49,30 @@ namespace Recipe2019W
             // Initialize Routes
             app.UseMvc(routes =>
                 {
-                    // Routing for pagination
+                    // Category Routing
                     routes.MapRoute(
-                        name: "pagination",
-                        template: "Recipe/Page{recipesPage}",
-                        defaults: new { Controllers = "Recipe", action = "List" }
+                        name: null,
+                        template: "{category}/Page{recipePage:int}",
+                        defaults: new { Controller = "Recipe", action = "List" }
                     );
 
+                    routes.MapRoute(
+                        name: null,
+                        template: "Page{recipePage:int}",
+                        defaults: new { Controller = "Recipe", action = "List", productPage = 1 }
+                    );
+
+                    routes.MapRoute(
+                        name: null,
+                        template: "{category}",
+                        defaults: new { Controller = "Recipe", action = "List", productPage = 1 }
+                    );
+
+                    routes.MapRoute(
+                        name: null,
+                        template: "",
+                        defaults: new { Controller = "Recipe", action = "List", productPage = 1 }
+                    );
 
                     routes.MapRoute(
                         name: "default",

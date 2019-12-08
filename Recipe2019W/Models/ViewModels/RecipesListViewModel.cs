@@ -10,5 +10,6 @@ namespace Recipe2019W.Models.ViewModels
     {
         public IEnumerable<Recipe> Recipes { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public string CurrentCategory { get; set; }
     }
 }

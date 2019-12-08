@@ -22,10 +22,12 @@ namespace Recipe2019W.Controllers
         }
 
         // Send the recipes in the repository to the view
-        public ViewResult List(int recipePage = 1) =>
+        public ViewResult List(string category, int recipePage = 1) =>
             View(new RecipesListViewModel
                 {
                     Recipes = repository.Recipes
+                        //Filter by category
+                        .Where(r => category == null || r.Type == category)
                         .OrderBy(r => r.RecipeID)
                         // Skip Recipe by pageSize
                         .Skip((recipePage - 1) * PageSize)
@@ -36,7 +38,8 @@ namespace Recipe2019W.Controllers
                         CurrentPage = recipePage,
                         ItemsPerPage = PageSize,
                         TotalItems = repository.Recipes.Count()
-                    }
+                    },
+                    CurrentCategory = category
                 }
             );
     }
