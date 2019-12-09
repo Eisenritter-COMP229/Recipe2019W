@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Recipe2019W.Models
 {
-    public class IngredientCollection
+    public class IngredientList
     {
         private List<IngredientLine> lineCollection = new List<IngredientLine>();
 
