@@ -33,6 +33,7 @@ namespace Recipe2019W
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(Configuration["Data:Recipe2019WIdentity:ConnectionString"]));
 
+
             services.AddIdentity<IdentityUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();
