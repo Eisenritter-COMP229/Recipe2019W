@@ -11,7 +11,7 @@ namespace Recipe2019W.Models
         public int IngredientID { get; set; }
         [Required(ErrorMessage = "Please enter a product name")]
         public string Name { get; set; }
-        [Required(ErrorMessage = "Please enter a description")]
-        public string Description { get; set; }
+
+        public string Description { get; set; } = "";
     }
 }

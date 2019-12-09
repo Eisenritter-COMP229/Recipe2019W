@@ -33,5 +33,38 @@ namespace Recipe2019W.Controllers
                         .Count()
                 }
             });
+
+        [HttpPost]
+        public IActionResult Edit(Ingredient ingredient)
+        {
+            if (ModelState.IsValid)
+            {
+                repository.SaveIngredient(ingredient);
+                TempData["message"] = $"{ingredient.Name} has been saved!";
+                return RedirectToAction(nameof(List),"Ingredient");
+            }
+            else
+            {
+                return View(ingredient);
+            }
         }
+
+        public ViewResult Create() => View("Edit", new Ingredient());
+
+        [HttpPost]
+        public IActionResult Delete(int ingredientId)
+        {
+            Ingredient deletedIngredient = repository.DeleteIngredient(ingredientId);
+
+            if (deletedIngredient != null)
+            {
+                TempData["message"] = $"{deletedIngredient.Name} was deleted";
+            }
+
+            return RedirectToAction(nameof(List));
+        }
+
+    }
+
+
 }

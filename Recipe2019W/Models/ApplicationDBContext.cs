@@ -15,5 +15,6 @@ namespace Recipe2019W.Models
         // Dataset of Recipes, get the recipes from database.
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
+       //  public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
     }
 }

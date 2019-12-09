@@ -9,5 +9,6 @@ namespace Recipe2019W.Models.ViewModels
     {
         public IEnumerable<Ingredient> Ingredients{ get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public string ReturnUrl { get; set; } = "/";
     }
 }

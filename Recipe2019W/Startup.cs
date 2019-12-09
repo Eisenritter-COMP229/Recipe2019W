@@ -41,6 +41,8 @@ namespace Recipe2019W
             //Everytime time IRecipeRepository is called, it will create the repository
             services.AddTransient<IRecipeRepository, EFRecipeRepository>();
 
+            services.AddTransient<IIngredientRepository, EFIngredientRepository>();
+
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
             // Add MVC Service
@@ -96,10 +98,9 @@ namespace Recipe2019W
                     );
 
                     routes.MapRoute(
-                        name: "default",
-                        template: "{controller=Recipe}/{action=List}/{id?}"
-                    );
-                }
+                            name: null,
+                            template: "{controller}/{action}/{id?}");
+                    }
             );
             // Send the database to the app
             SeedData.EnsurePopulated(app);
