@@ -7,7 +7,7 @@ namespace Recipe2019W.Models
 {
     public class IngredientLine
     {
-        public int IngredientCollID { get; set; }
+        public int IngredientLineID { get; set; }
         public Ingredient Ingredient{ get; set; }
         public Recipe Recipe { get; set; }
         public int Quantity { get; set; }
