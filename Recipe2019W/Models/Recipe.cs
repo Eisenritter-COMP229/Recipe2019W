@@ -19,8 +19,6 @@ namespace Recipe2019W.Models
         public string Type { get; set; }
         public string Creator { get; set; }
         public DateTime DateCreated { get; set; } = DateTime.Now;
-
-        [BindNever]
         public ICollection<IngredientLine> Lines { get; set; }
 
         public string TotalTimeS => (TotalTime / 60).ToString() + " HR " + (TotalTime % 60).ToString() + " MIN ";

@@ -7,7 +7,7 @@ namespace Recipe2019W.Models.ViewModels
 {
     public class RecipeIngredientViewModel
     {
-        public IEnumerable<Recipe> Recipes { get; set; }
-        public IEnumerable<Ingredient> Ingredients{ get; set; }
+        public Recipe Recipe { get; set; }
+        public Ingredient Ingredient{ get; set; }
     }
 }

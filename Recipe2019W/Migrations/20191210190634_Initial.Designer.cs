@@ -10,8 +10,8 @@ using Recipe2019W.Models;
 namespace Recipe2019W.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20191209180539_Ingredient")]
-    partial class Ingredient
+    [Migration("20191210190634_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -27,8 +27,7 @@ namespace Recipe2019W.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Description")
-                        .IsRequired();
+                    b.Property<string>("Description");
 
                     b.Property<string>("Name")
                         .IsRequired();
@@ -36,6 +35,29 @@ namespace Recipe2019W.Migrations
                     b.HasKey("IngredientID");
 
                     b.ToTable("Ingredients");
+                });
+
+            modelBuilder.Entity("Recipe2019W.Models.IngredientLine", b =>
+                {
+                    b.Property<int>("IngredientLineID")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int?>("IngredientID");
+
+                    b.Property<int>("Quantity");
+
+                    b.Property<int?>("RecipeID");
+
+                    b.Property<string>("Unit");
+
+                    b.HasKey("IngredientLineID");
+
+                    b.HasIndex("IngredientID");
+
+                    b.HasIndex("RecipeID");
+
+                    b.ToTable("IngredientLine");
                 });
 
             modelBuilder.Entity("Recipe2019W.Models.Recipe", b =>
@@ -63,6 +85,17 @@ namespace Recipe2019W.Migrations
                     b.HasKey("RecipeID");
 
                     b.ToTable("Recipes");
+                });
+
+            modelBuilder.Entity("Recipe2019W.Models.IngredientLine", b =>
+                {
+                    b.HasOne("Recipe2019W.Models.Ingredient", "Ingredient")
+                        .WithMany()
+                        .HasForeignKey("IngredientID");
+
+                    b.HasOne("Recipe2019W.Models.Recipe", "Recipe")
+                        .WithMany("Lines")
+                        .HasForeignKey("RecipeID");
                 });
 #pragma warning restore 612, 618
         }

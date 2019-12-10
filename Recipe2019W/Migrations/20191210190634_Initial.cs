@@ -1,17 +1,46 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Recipe2019W.Migrations
 {
-    public partial class IngredientLine : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AlterColumn<string>(
-                name: "Description",
-                table: "Ingredients",
-                nullable: true,
-                oldClrType: typeof(string));
+            migrationBuilder.CreateTable(
+                name: "Ingredients",
+                columns: table => new
+                {
+                    IngredientID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: false),
+                    Description = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Ingredients", x => x.IngredientID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Recipes",
+                columns: table => new
+                {
+                    RecipeID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Name = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    NumOfServings = table.Column<int>(nullable: false),
+                    PrepTime = table.Column<int>(nullable: false),
+                    TotalTime = table.Column<int>(nullable: false),
+                    Type = table.Column<string>(nullable: true),
+                    Creator = table.Column<string>(nullable: true),
+                    DateCreated = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Recipes", x => x.RecipeID);
+                });
 
             migrationBuilder.CreateTable(
                 name: "IngredientLine",
@@ -57,12 +86,11 @@ namespace Recipe2019W.Migrations
             migrationBuilder.DropTable(
                 name: "IngredientLine");
 
-            migrationBuilder.AlterColumn<string>(
-                name: "Description",
-                table: "Ingredients",
-                nullable: false,
-                oldClrType: typeof(string),
-                oldNullable: true);
+            migrationBuilder.DropTable(
+                name: "Ingredients");
+
+            migrationBuilder.DropTable(
+                name: "Recipes");
         }
     }
 }

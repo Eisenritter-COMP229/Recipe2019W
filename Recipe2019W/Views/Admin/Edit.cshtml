@@ -39,6 +39,31 @@
         <div><span asp-validation-for="NumOfServings" class="text-danger"></span></div>
         <input asp-for="NumOfServings" class="form-control" />
     </div>
+    <div>
+        @foreach (IngredientLine line in Model.Lines)
+        {
+        <tr>
+            <th>Ingredient</th>
+            <th>Amount</th>
+            <th>Unit</th>
+        </tr>
+            <tr>
+                
+                <td>@line.Ingredient</td>
+                <td>@line.Quantity</td>
+                <td>@line.Unit</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td colspan="3"></td>
+                <td>
+                    <button class="btn btn-primary" type="submit">Add Ingredient</button>
+                </td>
+            </tr>
+        }
+    </div>
+    
+
 
     <div class="text-center">
         <button class="btn btn-primary" type="submit">Save</button>
